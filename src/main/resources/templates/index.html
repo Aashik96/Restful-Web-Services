@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+<div>
+    <button id="getAllUserId" class="btn btn-primary">Get All Users</button>
+    <div id="getResultDiv">
+        <ul class="list-group"></ul>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#getAllUserId").click(function (event) {
+            event.preventDefault();
+            ajaxGetUsers();
+        });
+        
+        function ajaxGetUsers() {
+            $.ajax({
+                type : "GET",
+                url :  "http://localhost:8080/user/all",
+                success : function (result) {
+                    console.log("Hello");
+                    if(result.status = "Done"){
+                        $('getResultDiv ul').empty();
+                        var userList = "";
+                        $.each(result, function (i, user) {
+                            var user = "Id = "+user.id+"Name = "+ user.name +"Age = "+ user.age +"<br>";
+
+                            $('#getResultDiv .list-group').append(user);
+                            console.log("World!");
+                        });
+
+
+
+                        console.log("Success",result);
+
+
+                    }else{
+                        $("#getResultDiv").html("<strong>Error</strong>");
+                        console.log("Fail : ",result);
+                    }
+                },
+                
+                error : function (e) {
+                    $("#getResultDiv").html("<strong>Error</strong>");
+                    console.log("ERROR : ",e)
+                }
+            });
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

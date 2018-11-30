@@ -1,0 +1,23 @@
+
+
+<div class="container">
+    <h4 class="text-danger">User List</h4>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-success text-muted">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let user of users">
+            <tr class="table-danger text-info">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.age}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
